@@ -279,13 +279,13 @@ async def log_workout(message: Message, command: CommandObject):
         await message.reply(LOG_WORKOUT_ARGS_ERROR_MSG)
         return
 
-    if len(args) != 2:
+    if len(args) < 2:
         await message.reply(LOG_WORKOUT_ARGS_ERROR_MSG)
         return
 
-    workout_type = args[0]
+    workout_type = " ".join(args[:-1])
     try:
-        workout_duration = int(args[1])
+        workout_duration = int(args[-1].strip())
     except ValueError:
         await message.reply(LOG_WORKOUT_DURATION_ERROR_MSG)
         return
